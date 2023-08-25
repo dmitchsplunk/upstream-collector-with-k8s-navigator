@@ -1,0 +1,12 @@
+# kubectl apply -f myconfigmap.yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-configmap
+data:
+  SPLUNK_TRACE_URL: "https://ingest.us1.signalfx.com/v2/trace"
+  SPLUNK_API_URL: "https://api.us1.signalfx.com"
+  SPLUNK_INGEST_URL: "https://ingest.us1.signalfx.com"
+  SPLUNK_HEC_URL: "https://<HEC ENDPOINT>>:8088/services/collector"
+  K8S_CLUSTER_NAME: "<cluster name>"
