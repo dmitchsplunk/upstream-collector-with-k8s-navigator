@@ -1,0 +1,1 @@
+# upstream-collector-with-k8s-navigator
