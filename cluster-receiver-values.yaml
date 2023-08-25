@@ -25,6 +25,11 @@ extraEnvs:
       configMapKeyRef:
         name: otel-configmap
         key: SPLUNK_INGEST_URL
+  - name: K8S_CLUSTER_NAME
+    valueFrom:
+      configMapKeyRef:
+        name: otel-configmap
+        key: K8S_CLUSTER_NAME
 
 config:
   receivers:
