@@ -1,3 +1,5 @@
 .idea/
 mysecret.yaml
 myconfigmap.yaml
+cluster-receiver-reference.yaml
+agent-reference.yaml

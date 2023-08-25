@@ -35,24 +35,6 @@ config:
       auth_type: serviceAccount
       metadata_exporters:
         - signalfx
-    prometheus/k8s-api-server:
-      config:
-        scrape_configs:
-          - authorization:
-              credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-            job_name: api-server-metrics
-            metric_relabel_configs:
-              - action: keep
-                regex: (apiserver_request_total|etcd_db_total_size_in_bytes|apiserver_storage_objects)
-                source_labels:
-                  - __name__
-            scheme: https
-            scrape_interval: 120s
-            static_configs:
-              - targets:
-                  - ${KUBERNETES_SERVICE_HOST}:443
-            tls_config:
-              ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
     prometheus/k8s_cluster_receiver:
       config:
         scrape_configs:
@@ -60,7 +42,7 @@ config:
             scrape_interval: 10s
             static_configs:
               - targets:
-                  - ${K8S_POD_IP}:8889
+                  - ${env:MY_POD_IP}:8888
   processors:
     resource:
       attributes:
@@ -108,7 +90,7 @@ config:
       traces: null
       logs: null
       metrics:
-        receivers: [k8s_cluster, prometheus/k8s-api-server]
+        receivers: [k8s_cluster]
         processors: [memory_limiter, batch, resource, resource/k8s_cluster]
         exporters: [signalfx]
       metrics/collector:

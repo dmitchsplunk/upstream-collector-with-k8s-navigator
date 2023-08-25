@@ -8,6 +8,9 @@ presets:
   hostMetrics:
     enabled: true
 
+# this is needed to connect to the kube api server
+dnsPolicy: "ClusterFirstWithHostNet"
+
 # need to add additional permissions to the clusterRole for
 # the kubeletstats receiver to work successfully
 # reference: https://github.com/signalfx/splunk-otel-collector-chart/blob/main/examples/distribution-eks/rendered_manifests/clusterRole.yaml
@@ -265,8 +268,12 @@ config:
       traces:
         exporters: [sapm, signalfx]
       metrics:
-        receivers: [otlp, prometheus, hostmetrics, kubeletstats, receiver_creator]
-        processors: [k8sattributes, memory_limiter, batch, resourcedetection, resource, resource/add_agent_k8s]
+        receivers: [otlp, hostmetrics, kubeletstats, receiver_creator]
+        processors: [memory_limiter, batch, resourcedetection, resource]
+        exporters: [signalfx]
+      metrics/agent:
+        receivers: [prometheus]
+        processors: [memory_limiter, batch, resourcedetection, resource, resource/add_agent_k8s]
         exporters: [signalfx]
 #      logs:
 #        exporters: [splunk_hec]
