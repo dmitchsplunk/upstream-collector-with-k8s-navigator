@@ -150,6 +150,8 @@ config:
       correlation: null
       ingest_url: "${SPLUNK_INGEST_URL}"
       sync_host_metadata: true
+      include_metrics:
+        - metric_names: [container.cpu.time, container.memory.usage, container_cpu_utilization, container.cpu.time, k8s.pod.network.io]
   processors:
     filter/logs:
       logs:
@@ -248,6 +250,17 @@ config:
       override: true
       timeout: 10s
   receivers:
+    hostmetrics:
+      collection_interval: 10s
+      scrapers:
+        cpu: null
+        disk: null
+        filesystem: null
+        load: null
+        memory: null
+        network: null
+        paging: null
+        processes: null
     kubeletstats:
       auth_type: serviceAccount
       collection_interval: 10s
