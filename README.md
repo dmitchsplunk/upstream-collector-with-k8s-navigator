@@ -1,6 +1,8 @@
-# upstream-collector-with-k8s-navigator
+# Using the Upstream OpenTelemetry Collector with Splunk's Kubernetes Navigator
 
-This example shows how to use the upstream the OpenTelemetry Collector to monitor a Kubernetes cluster and export the data to Splunk Observability Cloud. 
+This example shows how to use the upstream OpenTelemetry Collector to monitor a Kubernetes cluster and export the data to Splunk Observability Cloud. 
+
+Note that this configuration is not supported by Splunk. For a Splunk-supported solution, please use the [Splunk Distribution of the OpenTelemetry Collector](https://docs.splunk.com/Observability/gdi/opentelemetry/opentelemetry.html). 
 
 It uses the [OpenTelemetry Collector Helm Chart](https://opentelemetry.io/docs/kubernetes/helm/collector/) to deploy two types of collectors: 
 
