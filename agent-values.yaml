@@ -150,6 +150,8 @@ config:
       correlation: null
       ingest_url: "${SPLUNK_INGEST_URL}"
       sync_host_metadata: true
+      # the exporter filters out metrics that are needed by the K8s navigator UI
+      # we need to add some of these back for the visualizations to work as expected
       include_metrics:
         - metric_names: [container.cpu.time, container.memory.usage, container_cpu_utilization, container.cpu.time, k8s.pod.network.io]
   processors:
